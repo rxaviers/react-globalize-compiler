@@ -1,6 +1,6 @@
 {
   "name": "react-globalize-compiler",
-  "version": "0.0.1-pre",
+  "version": "0.0.1",
   "keywords": [
     "gruntplugin",
     "globalize",
