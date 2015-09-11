@@ -16,6 +16,7 @@ describe("Extract ReactGlobalize default messages", function() {
     expect(defaultMessages).to.be.an("object");
     expect(defaultMessages).to.include.keys(
       "Standalone Number",
+      "What needs to be done?",
       "For more information, see the [yarsk]YARSK Readme[|yarsk], [reactGlobalize]React Globalize Readme[|reactGlobalize], and [globalize]Globalize Readme[|globalize]."
     );
     expect(defaultMessages["For more information, see the [yarsk]YARSK Readme[|yarsk], [reactGlobalize]React Globalize Readme[|reactGlobalize], and [globalize]Globalize Readme[|globalize]."]).to.equal("For more information, see the [yarsk]YARSK Readme[/yarsk], [reactGlobalize]React Globalize Readme[/reactGlobalize], and [globalize]Globalize Readme[/globalize].");

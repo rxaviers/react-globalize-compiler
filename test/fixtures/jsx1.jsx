@@ -75,6 +75,7 @@ var Application = React.createClass({
             [globalize]Globalize Readme[/globalize].
             </FormatMessage>
           </p>
+          <input value={Globalize.formatMessage("What needs to be done?")} />
         </main>
       </div>
     </div>;
