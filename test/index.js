@@ -4,10 +4,15 @@ var esprima = require("esprima");
 var expect = require("chai").expect;
 var reactGlobalizeCompiler = require("../index");
 
+function getFixtureAst(filename) {
+  return esprima.parse(babel.transform(fs.readFileSync(__dirname + "/fixtures/" + filename)).code);
+}
+
 var fixtures = {
-  es6: esprima.parse(babel.transform(fs.readFileSync(__dirname + "/fixtures/es6.jsx")).code),
-  jsx1: esprima.parse(babel.transform(fs.readFileSync(__dirname + "/fixtures/jsx1.jsx")).code),
-  jsx2: esprima.parse(babel.transform(fs.readFileSync(__dirname + "/fixtures/jsx2.jsx")).code)
+  es6: getFixtureAst("es6.jsx"),
+  es6addons: getFixtureAst("es6-addOn.jsx"),
+  jsx1: getFixtureAst("jsx1.jsx"),
+  jsx2: getFixtureAst("jsx2.jsx"),
 };
 
 describe("Extract ReactGlobalize default messages", function() {
@@ -30,6 +35,14 @@ describe("Extract ReactGlobalize default messages", function() {
       "For more information, see the [yarsk]YARSK Readme[|yarsk], [reactGlobalize]React Globalize Readme[|reactGlobalize], and [globalize]Globalize Readme[|globalize]."
     );
     expect(defaultMessages["For more information, see the [yarsk]YARSK Readme[|yarsk], [reactGlobalize]React Globalize Readme[|reactGlobalize], and [globalize]Globalize Readme[|globalize]."]).to.equal("For more information, see the [yarsk]YARSK Readme[/yarsk], [reactGlobalize]React Globalize Readme[/reactGlobalize], and [globalize]Globalize Readme[/globalize].");
+  });
+
+  it("should extract default messages when using react/addons", function() {
+    var defaultMessages = reactGlobalizeCompiler.extractDefaultMessages(fixtures.es6addons);
+    expect(defaultMessages).to.be.an("object");
+    expect(defaultMessages).to.include.keys(
+      "View More People"
+    );
   });
 });
 
