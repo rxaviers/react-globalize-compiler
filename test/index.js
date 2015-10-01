@@ -11,6 +11,7 @@ function getFixtureAst(filename) {
 var fixtures = {
   es6: getFixtureAst("es6.jsx"),
   es6addons: getFixtureAst("es6-addOn.jsx"),
+  es6both: getFixtureAst("es6-both.jsx"),
   jsx1: getFixtureAst("jsx1.jsx"),
   jsx2: getFixtureAst("jsx2.jsx"),
 };
@@ -42,6 +43,16 @@ describe("Extract ReactGlobalize default messages", function() {
     expect(defaultMessages).to.be.an("object");
     expect(defaultMessages).to.include.keys(
       "View More People"
+    );
+  });
+
+  it("should extract from both components and Globalize functions", function() {
+    var defaultMessages = reactGlobalizeCompiler.extractDefaultMessages(fixtures.es6both);
+    expect(defaultMessages).to.be.an("object");
+    expect(defaultMessages).to.include.keys(
+      "(user)'s (count, plural, one (photo) other (photos))",
+      "Header",
+      "My Header"
     );
   });
 });
