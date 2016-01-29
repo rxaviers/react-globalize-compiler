@@ -1,11 +1,14 @@
-var babel = require("babel");
+var babel = require("babel-core");
 var fs = require("fs");
 var esprima = require("esprima");
 var expect = require("chai").expect;
 var reactGlobalizeCompiler = require("../index");
 
 function getFixtureAst(filename) {
-  return esprima.parse(babel.transform(fs.readFileSync(__dirname + "/fixtures/" + filename)).code);
+  var code = fs.readFileSync(__dirname + "/fixtures/" + filename);
+  var options = { presets: ["es2015", "react"] };
+
+  return esprima.parse( babel.transform(code, options).code );
 }
 
 var fixtures = {
